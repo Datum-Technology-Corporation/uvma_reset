@@ -1,4 +1,9 @@
-# Moore.io Core IP
-
 # About
-Moore.io's collection of RTL, DV & EDApp IP common to almost all Digital Design projects.
+Moore.io UVM Reset Agent
+
+# [Home Page](https://datum-technology-corporation.github.io/uvml_reset/)
+
+# IP(s)
+* uvma_reset
+* uvme_reset_st
+* uvmt_reset_st
