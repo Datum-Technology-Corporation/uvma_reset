@@ -154,11 +154,6 @@ class uvmt_reset_st_base_test_c extends uvm_test;
     */
    extern virtual task start_clk();
    
-   /**
-    * Fatals out after simulation_timeout has elapsed.
-    */
-   extern virtual task simulation_timeout();
-   
 endclass : uvmt_reset_st_base_test_c
 
 
@@ -192,7 +187,6 @@ endfunction : build_phase
 function void uvmt_reset_st_base_test_c::connect_phase(uvm_phase phase);
    
    super.connect_phase(phase);
-   
    vsequencer = env.vsequencer;
    
 endfunction : connect_phase
@@ -203,7 +197,6 @@ task uvmt_reset_st_base_test_c::run_phase(uvm_phase phase);
    super.run_phase(phase);
    
    start_clk();
-   simulation_timeout();
    
 endtask : run_phase
 
@@ -211,7 +204,6 @@ endtask : run_phase
 function void uvmt_reset_st_base_test_c::report_phase(uvm_phase phase);
    
    super.report_phase(phase);
-   
    `uvm_info("TEST", $sformatf("Scoreboard context at end of simulation:\n%s", env_cntxt.sb_cntxt.sprint()), UVM_NONE)
    
 endfunction : report_phase
@@ -243,10 +235,10 @@ endfunction : phase_ended
 function void uvmt_reset_st_base_test_c::retrieve_clk_gen_vif();
    
    if (!uvm_config_db#(virtual uvmt_reset_st_clk_gen_if)::get(this, "", "clk_gen_vif", clk_gen_vif)) begin
-      `uvm_fatal("VIF", $sformatf("Could not find clk_gen_vif handle of type %s in uvm_config_db", $typename(clk_gen_vif)))
+      `uvm_fatal("TEST", $sformatf("Could not find clk_gen_vif handle of type %s in uvm_config_db", $typename(clk_gen_vif)))
    end
    else begin
-      `uvm_info("VIF", $sformatf("Found clk_gen_vif handle of type %s in uvm_config_db", $typename(clk_gen_vif)), UVM_DEBUG)
+      `uvm_info("TEST", $sformatf("Found clk_gen_vif handle of type %s in uvm_config_db", $typename(clk_gen_vif)), UVM_DEBUG)
    end
    
 endfunction : retrieve_clk_gen_vif
@@ -273,10 +265,9 @@ endfunction : randomize_test
 
 function void uvmt_reset_st_base_test_c::cfg_hrtbt_monitor();
    
-   //`uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout)
-   //`uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
-   uvml_default_hrtbt.startup_timeout  = test_cfg.startup_timeout ;
-   uvml_default_hrtbt.heartbeat_period = test_cfg.heartbeat_period;
+   `uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout)
+   `uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
+   `uvml_watchdog_set_cfg(timeout, test_cfg.simulation_timeout)
    
 endfunction : cfg_hrtbt_monitor
 
@@ -332,18 +323,6 @@ task uvmt_reset_st_base_test_c::start_clk();
    clk_gen_vif.start_clk();
    
 endtask : start_clk
-
-
-task uvmt_reset_st_base_test_c::simulation_timeout();
-   
-   fork
-      begin
-         #(test_cfg.simulation_timeout * 1ns);
-         `uvm_fatal("TIMEOUT", $sformatf("Global timeout after %0dns. Heartbeat list:\n%s", test_cfg.simulation_timeout, uvml_default_hrtbt.print_comp_names()))
-      end
-   join_none
-   
-endtask : simulation_timeout
 
 
 `endif // __UVMT_RESET_ST_BASE_TEST_SV__
