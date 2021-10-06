@@ -41,8 +41,6 @@ tools_path         = project_dir + "/tools"
 tools_imports_path = tools_path + "/.imports"
 
 def main():
-    if os.path.exists(tools_imports_path):
-        shutil.rmtree(tools_imports_path)
     print("Fetching project dependencies ...")
     clone_repo_tools_to_imports("https://github.com/Datum-Technology-Corporation/uvml.git"     , "main", "dvm"      )
     clone_repo_dv_to_imports   ("https://github.com/Datum-Technology-Corporation/uvm.git"      , "main", "uvm"      )
