@@ -1,10 +1,10 @@
 # About
-The Moore.io UVM Reset Agent is a simple but necessary component to all UVM test benches.
+The Moore.io UVM Reset Agent is a simple and vital element to any UVM test bench.  Both for driving and monitoring purposes.  This project consists of the agent (`uvma_reset_pkg`), the self-testing UVM environment (`uvme_reset_st_pkg`) and the test bench (`uvmt_reset_st_pkg`) to verify the agent against itself.
 
 # IP
 * [Download latest release (.tgz)](Todo)
 * [View latest documentation](Todo)
-* [Browse code](https://github.com/Datum-Technology-Corporation/uvma_reset)
+* [Browse code](https://github.com/Datum-Technology-Corporation/uvma_reset/tree/main/dv/uvma_reset)
 
 # Metrics
 ## Stability
