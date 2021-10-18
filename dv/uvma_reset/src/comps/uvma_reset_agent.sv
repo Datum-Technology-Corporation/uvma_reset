@@ -18,7 +18,7 @@
  * Top-level component that encapsulates, builds and connects all others.
  * Capable of driving/monitoring Reset interface.
  */
-class uvma_reset_agent_c extends uvm_agent;
+class uvma_reset_agent_c extends uvml_agent_c;
    
    // Objects
    uvma_reset_cfg_c    cfg;

@@ -17,7 +17,7 @@
 /**
  * Component driving a Reset virtual interface (uvma_reset_if).
  */
-class uvma_reset_drv_c extends uvm_driver#(
+class uvma_reset_drv_c extends uvml_drv_c #(
    .REQ(uvma_reset_seq_item_c),
    .RSP(uvma_reset_seq_item_c)
 );

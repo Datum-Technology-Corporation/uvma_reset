@@ -17,7 +17,7 @@
 /**
  * Top-level component that encapsulates, builds and connects all other Reset environment components.
  */
-class uvme_reset_st_env_c extends uvm_env;
+class uvme_reset_st_env_c extends uvml_env_c;
    
    // Objects
    uvme_reset_st_cfg_c    cfg;

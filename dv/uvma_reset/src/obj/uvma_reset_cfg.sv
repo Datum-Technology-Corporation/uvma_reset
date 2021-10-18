@@ -18,7 +18,7 @@
  * Object encapsulating all parameters for creating, connecting and running all
  * Reset agent (uvma_reset_agent_c) components.
  */
-class uvma_reset_cfg_c extends uvm_object;
+class uvma_reset_cfg_c extends uvml_cfg_c;
    
    // Generic options
    rand bit                      enabled;

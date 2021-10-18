@@ -19,7 +19,7 @@
  * Reset VIP Self-Testing Environment (uvme_reset_st_env_c)
  * components.
  */
-class uvme_reset_st_cfg_c extends uvm_object;
+class uvme_reset_st_cfg_c extends uvml_cfg_c;
    
    // Generic options
    rand bit                      enabled;

@@ -18,20 +18,19 @@
  * Abstract component from which all other Reset test cases must ultimately extend. Subclasses must provide stimulus
  * via the virtual sequencer by implementing UVM runtime phases.
  */
-class uvmt_reset_st_base_test_c extends uvm_test;
+class uvmt_reset_st_base_test_c extends uvml_test_c;
    
    // Objects
-   rand uvmt_reset_st_test_cfg_c  test_cfg ;
-   rand uvme_reset_st_cfg_c       env_cfg  ;
-   uvme_reset_st_cntxt_c          env_cntxt;
-   uvml_logs_rs_text_c            rs       ;
+   rand uvmt_reset_st_test_cfg_c  test_cfg ; ///< 
+   rand uvme_reset_st_cfg_c       env_cfg  ; ///< 
+   uvme_reset_st_cntxt_c          env_cntxt; ///< 
+   uvml_logs_rs_text_c            rs       ; ///< 
    
    // Components
-   uvme_reset_st_env_c   env       ;
-   uvme_reset_st_vsqr_c  vsequencer;
+   uvme_reset_st_env_c   env       ; ///< 
+   uvme_reset_st_vsqr_c  vsequencer; ///< 
    
-   // Handle to clock generation interface
-   virtual uvmt_reset_st_clk_gen_if  clk_gen_vif;
+   virtual uvmt_reset_st_clk_gen_if  clk_gen_vif; ///< Handle to clock generation interface
    
    
    `uvm_component_utils_begin(uvmt_reset_st_base_test_c)

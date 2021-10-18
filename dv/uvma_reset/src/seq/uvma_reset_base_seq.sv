@@ -18,7 +18,7 @@
  * Abstract object from which all other Reset agent sequences must extend.
  * Subclasses must be run on Reset sequencer (uvma_reset_sqr_c) instance.
  */
-class uvma_reset_base_seq_c extends uvm_sequence#(
+class uvma_reset_base_seq_c extends uvml_seq_c #(
    .REQ(uvma_reset_seq_item_c),
    .RSP(uvma_reset_seq_item_c)
 );

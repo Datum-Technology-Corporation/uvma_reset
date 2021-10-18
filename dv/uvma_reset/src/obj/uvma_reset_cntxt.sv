@@ -18,7 +18,7 @@
  * Object encapsulating all state variables for all Reset agent
  * (uvma_reset_agent_c) components.
  */
-class uvma_reset_cntxt_c extends uvm_object;
+class uvma_reset_cntxt_c extends uvml_cntxt_c;
    
    // Handle to agent interface
    virtual uvma_reset_if  vif;

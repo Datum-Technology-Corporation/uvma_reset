@@ -18,7 +18,7 @@
  * Component running Reset sequences extending uvma_reset_seq_base_c.
  * Provides sequence items for uvma_reset_drv_c.
  */
-class uvma_reset_sqr_c extends uvm_sequencer#(
+class uvma_reset_sqr_c extends uvml_sqr_c #(
    .REQ(uvma_reset_seq_item_c),
    .RSP(uvma_reset_seq_item_c)
 );
@@ -59,12 +59,12 @@ function void uvma_reset_sqr_c::build_phase(uvm_phase phase);
    super.build_phase(phase);
    
    void'(uvm_config_db#(uvma_reset_cfg_c)::get(this, "", "cfg", cfg));
-   if (!cfg) begin
+   if (cfg == null) begin
       `uvm_fatal("CFG", "Configuration handle is null")
    end
    
    void'(uvm_config_db#(uvma_reset_cntxt_c)::get(this, "", "cntxt", cntxt));
-   if (!cntxt) begin
+   if (cfg == null) begin
       `uvm_fatal("CNTXT", "Context handle is null")
    end
    

@@ -18,7 +18,7 @@
  * Object encapsulating all state variables for Reset VIP
  * Self-Testing environment (uvme_reset_st_env_c) components.
  */
-class uvme_reset_st_cntxt_c extends uvm_object;
+class uvme_reset_st_cntxt_c extends uvml_cntxt_c;
    
    // Agent context handles
    uvma_reset_cntxt_c  active_cntxt;

@@ -17,7 +17,7 @@
 /**
  * Component sampling transactions from a Reset virtual interface (uvma_reset_if).
  */
-class uvma_reset_mon_c extends uvm_monitor;
+class uvma_reset_mon_c extends uvml_mon_c;
    
    // Objects
    uvma_reset_cfg_c    cfg  ; ///< 
