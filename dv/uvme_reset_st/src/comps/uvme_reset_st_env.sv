@@ -15,8 +15,7 @@
 
 
 /**
- * Top-level component that encapsulates, builds and connects all other
- * Reset environment components.
+ * Top-level component that encapsulates, builds and connects all other Reset environment components.
  */
 class uvme_reset_st_env_c extends uvm_env;
    
@@ -29,7 +28,6 @@ class uvme_reset_st_env_c extends uvm_env;
    uvma_reset_agent_c  passive_agent;
    
    // Components
-   uvme_reset_st_cov_model_c   cov_model;
    uvme_reset_st_prd_c         predictor;
    uvme_reset_st_sb_simplex_c  sb;
    uvme_reset_st_vsqr_c        vsequencer;
@@ -88,11 +86,6 @@ class uvme_reset_st_env_c extends uvm_env;
    extern virtual function void create_vsequencer();
    
    /**
-    * Creates environment's coverage model.
-    */
-   extern virtual function void create_cov_model();
-   
-   /**
     * Connects agents to predictor.
     */
    extern virtual function void connect_predictor();
@@ -107,17 +100,16 @@ class uvme_reset_st_env_c extends uvm_env;
     */
    extern virtual function void assemble_vsequencer();
    
-   /**
-    * Connects environment coverage model to agents/scoreboards/predictor.
-    */
-   extern virtual function void connect_coverage_model();
-   
 endclass : uvme_reset_st_env_c
 
 
 function uvme_reset_st_env_c::new(string name="uvme_reset_st_env", uvm_component parent=null);
    
    super.new(name, parent);
+   set_type_override_by_type(
+      uvma_reset_cov_model_c   ::get_type(),
+      uvme_reset_st_cov_model_c::get_type(),
+   );
    
 endfunction : new
 
@@ -149,10 +141,6 @@ function void uvme_reset_st_env_c::build_phase(uvm_phase phase);
       if (cfg.is_active) begin
          create_vsequencer();
       end
-      
-      if (cfg.cov_model_enabled) begin
-         create_cov_model();
-      end
    end
    
 endfunction : build_phase
@@ -171,10 +159,6 @@ function void uvme_reset_st_env_c::connect_phase(uvm_phase phase);
       if (cfg.is_active) begin
          assemble_vsequencer();
       end
-      
-      if (cfg.cov_model_enabled) begin
-         connect_coverage_model();
-      end
    end
    
 endfunction: connect_phase
@@ -182,27 +166,27 @@ endfunction: connect_phase
 
 function void uvme_reset_st_env_c::assign_cfg();
    
-   uvm_config_db#(uvme_reset_st_cfg_c)::set(this, "*"              , "cfg", cfg              );
-   uvm_config_db#(uvma_reset_cfg_c   )::set(this, "active_agent", "cfg", cfg.active_cfg);
+   uvm_config_db#(uvme_reset_st_cfg_c)::set(this, "*"            , "cfg", cfg            );
+   uvm_config_db#(uvma_reset_cfg_c   )::set(this, "active_agent" , "cfg", cfg.active_cfg );
    uvm_config_db#(uvma_reset_cfg_c   )::set(this, "passive_agent", "cfg", cfg.passive_cfg);
-   uvm_config_db#(uvml_sb_cfg_c        )::set(this, "sb"             , "cfg", cfg.sb_cfg       );
+   uvm_config_db#(uvml_sb_cfg_c      )::set(this, "sb"           , "cfg", cfg.sb_cfg     );
    
 endfunction: assign_cfg
 
 
 function void uvme_reset_st_env_c::assign_cntxt();
    
-   uvm_config_db#(uvme_reset_st_cntxt_c)::set(this, "*"              , "cntxt", cntxt                );
-   uvm_config_db#(uvma_reset_cntxt_c   )::set(this, "active_agent", "cntxt", cntxt.active_cntxt);
+   uvm_config_db#(uvme_reset_st_cntxt_c)::set(this, "*"            , "cntxt", cntxt              );
+   uvm_config_db#(uvma_reset_cntxt_c   )::set(this, "active_agent" , "cntxt", cntxt.active_cntxt );
    uvm_config_db#(uvma_reset_cntxt_c   )::set(this, "passive_agent", "cntxt", cntxt.passive_cntxt);
-   uvm_config_db#(uvml_sb_cntxt_c        )::set(this, "sb"             , "cntxt", cntxt.sb_cntxt       );
+   uvm_config_db#(uvml_sb_cntxt_c      )::set(this, "sb"           , "cntxt", cntxt.sb_cntxt     );
    
 endfunction: assign_cntxt
 
 
 function void uvme_reset_st_env_c::create_agents();
    
-   active_agent = uvma_reset_agent_c::type_id::create("active_agent", this);
+   active_agent  = uvma_reset_agent_c::type_id::create("active_agent" , this);
    passive_agent = uvma_reset_agent_c::type_id::create("passive_agent", this);
    
 endfunction: create_agents
@@ -223,13 +207,6 @@ function void uvme_reset_st_env_c::create_vsequencer();
    vsequencer = uvme_reset_st_vsqr_c::type_id::create("vsequencer", this);
    
 endfunction: create_vsequencer
-
-
-function void uvme_reset_st_env_c::create_cov_model();
-   
-   cov_model = uvme_reset_st_cov_model_c::type_id::create("cov_model", this);
-   
-endfunction: create_cov_model
 
 
 function void uvme_reset_st_env_c::connect_predictor();
@@ -256,15 +233,6 @@ function void uvme_reset_st_env_c::assemble_vsequencer();
    vsequencer.active_sequencer = active_agent.sequencer;
    
 endfunction: assemble_vsequencer
-
-
-function void uvme_reset_st_env_c::connect_coverage_model();
-   
-   active_agent .drv_ap.connect(cov_model.active_seq_item_export);
-   active_agent .mon_ap.connect(cov_model.active_mon_trn_export );
-   passive_agent.mon_ap.connect(cov_model.passive_mon_trn_export);
-   
-endfunction: connect_coverage_model
 
 
 `endif // __UVME_RESET_ST_ENV_SV__

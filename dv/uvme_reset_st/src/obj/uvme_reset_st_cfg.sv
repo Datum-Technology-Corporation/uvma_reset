@@ -80,6 +80,19 @@ class uvme_reset_st_cfg_c extends uvm_object;
          /*soft*/ active_cfg .trn_log_enabled == 1;
          /*soft*/ passive_cfg.trn_log_enabled == 1;
       }
+      else {
+         active_cfg .trn_log_enabled == 0;
+         passive_cfg.trn_log_enabled == 0;
+      }
+      
+      if (cov_model_enabled) {
+         /*soft*/ active_cfg .cov_model_enabled == 1;
+         /*soft*/ passive_cfg.cov_model_enabled == 1;
+      }
+      else {
+         active_cfg .cov_model_enabled == 0;
+         passive_cfg.cov_model_enabled == 0;
+      }
    }
    
    constraint sb_cfg_cons {

@@ -15,37 +15,16 @@
 
 
 /**
- * Component encapsulating Reset Self-Test Environment functional
- * coverage model.
+ * Component encapsulating Reset Self-Test Environment functional coverage model.
  */
-class uvme_reset_st_cov_model_c extends uvm_component;
+class uvme_reset_st_cov_model_c extends uvma_reset_cov_model_c;
    
-   // Coverage targets
-   uvme_reset_st_cfg_c    cfg;
-   uvme_reset_st_cntxt_c  cntxt;
-   uvma_reset_seq_item_c  active_seq_item;
-   uvma_reset_mon_trn_c   active_mon_trn;
-   uvma_reset_mon_trn_c   passive_mon_trn;
-   
-   // TLM
-   uvm_analysis_export  #(uvma_reset_seq_item_c)  active_seq_item_export;
-   uvm_analysis_export  #(uvma_reset_mon_trn_c )  active_mon_trn_export ;
-   uvm_analysis_export  #(uvma_reset_mon_trn_c )  passive_mon_trn_export;
-   uvm_tlm_analysis_fifo#(uvma_reset_seq_item_c)  active_seq_item_fifo  ;
-   uvm_tlm_analysis_fifo#(uvma_reset_mon_trn_c )  active_mon_trn_fifo   ;
-   uvm_tlm_analysis_fifo#(uvma_reset_mon_trn_c )  passive_mon_trn_fifo  ;
-   
-   
-   `uvm_component_utils_begin(uvme_reset_st_cov_model_c)
-      `uvm_field_object(cfg  , UVM_DEFAULT)
-      `uvm_field_object(cntxt, UVM_DEFAULT)
-   `uvm_component_utils_end
-   
+   `uvm_component_utils(uvme_reset_st_cov_model_c)
    
    covergroup reset_st_cfg_cg;
       // TODO Implement reset_st_cfg_cg
       //      Ex: abc_cpt : coverpoint cfg.abc;
-      //          xyz_cpt : coverpoint cfg.xyz;
+      is_active_cpt : coverpoint cfg.is_active;
    endgroup : reset_st_cfg_cg
    
    covergroup reset_st_cntxt_cg;
@@ -54,44 +33,23 @@ class uvme_reset_st_cov_model_c extends uvm_component;
       //          xyz_cpt : coverpoint cntxt.xyz;
    endgroup : reset_st_cntxt_cg
    
-   covergroup reset_st_active_seq_item_cg;
+   covergroup reset_st_seq_item_cg;
       // TODO Implement reset_st_active_seq_item_cg
       //      Ex: abc_cpt : coverpoint active_seq_item.abc;
       //          xyz_cpt : coverpoint active_seq_item.xyz;
-   endgroup : reset_st_active_seq_item_cg
+   endgroup : reset_st_seq_item_cg
    
-   covergroup reset_st_active_mon_trn_cg;
-      // TODO Implement reset_st_active_mon_trn_cg
-      //      Ex: abc_cpt : coverpoint active_mon_trn.abc;
-      //          xyz_cpt : coverpoint active_mon_trn.xyz;
-   endgroup : reset_st_active_mon_trn_cg
-   
-   covergroup reset_st_passive_mon_trn_cg;
+   covergroup reset_st_mon_trn_cg;
       // TODO Implement reset_st_passive_mon_trn_cg
       //      Ex: abc_cpt : coverpoint passive_mon_trn.abc;
       //          xyz_cpt : coverpoint passive_mon_trn.xyz;
-   endgroup : reset_st_passive_mon_trn_cg
+   endgroup : reset_st_mon_trn_cg
    
    
    /**
     * Default constructor.
     */
    extern function new(string name="uvme_reset_st_cov_model", uvm_component parent=null);
-   
-   /**
-    * Ensures cfg & cntxt handles are not null.
-    */
-   extern virtual function void build_phase(uvm_phase phase);
-   
-   /**
-    * TODO Describe uvme_reset_st_cov_model_c::connect_phase()
-    */
-   extern virtual function void connect_phase(uvm_phase phase);
-   
-   /**
-    * Describe uvme_reset_st_cov_model_c::run_phase()
-    */
-   extern virtual task run_phase(uvm_phase phase);
    
    /**
     * TODO Describe uvme_reset_st_cov_model_c::sample_cfg()
@@ -104,19 +62,14 @@ class uvme_reset_st_cov_model_c extends uvm_component;
    extern function void sample_cntxt();
    
    /**
-    * TODO Describe uvme_reset_st_cov_model_c::sample_active_seq_item()
+    * TODO Describe uvme_reset_st_cov_model_c::sample_seq_item()
     */
-   extern function void sample_active_seq_item();
+   extern function void sample_seq_item();
    
    /**
-    * TODO Describe uvme_reset_st_cov_model_c::sample_active_mon_trn()
+    * TODO Describe uvme_reset_st_cov_model_c::sample_mon_trn()
     */
-   extern function void sample_active_mon_trn();
-   
-   /**
-    * TODO Describe uvme_reset_st_cov_model_c::sample_passive_mon_trn()
-    */
-   extern function void sample_passive_mon_trn();
+   extern function void sample_mon_trn();
    
 endclass : uvme_reset_st_cov_model_c
 
@@ -125,83 +78,11 @@ function uvme_reset_st_cov_model_c::new(string name="uvme_reset_st_cov_model", u
    
    super.new(name, parent);
    
+   // Build covergroups
+   reset_st_cfg_cg   = new();
+   reset_st_cntxt_cg = new();
+   
 endfunction : new
-
-
-function void uvme_reset_st_cov_model_c::build_phase(uvm_phase phase);
-   
-   super.build_phase(phase);
-   
-   void'(uvm_config_db#(uvme_reset_st_cfg_c)::get(this, "", "cfg", cfg));
-   if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
-   end
-   
-   void'(uvm_config_db#(uvme_reset_st_cntxt_c)::get(this, "", "cntxt", cntxt));
-   if (!cntxt) begin
-      `uvm_fatal("CNTXT", "Context handle is null")
-   end
-   
-   // Build TLM objects
-   active_seq_item_export = new("active_seq_item_export", this);
-   active_mon_trn_export  = new("active_mon_trn_export" , this);
-   passive_mon_trn_export = new("passive_mon_trn_export", this);
-   active_seq_item_fifo   = new("active_seq_item_fifo"  , this);
-   active_mon_trn_fifo    = new("active_mon_trn_fifo"   , this);
-   passive_mon_trn_fifo   = new("passive_mon_trn_fifo"  , this);
-   
-endfunction : build_phase
-
-
-function void uvme_reset_st_cov_model_c::connect_phase(uvm_phase phase);
-   
-   super.connect_phase(phase);
-   
-   // Connect TLM objects
-   active_seq_item_export.connect(active_seq_item_fifo.analysis_export);
-   active_mon_trn_export .connect(active_mon_trn_fifo .analysis_export);
-   passive_mon_trn_export.connect(passive_mon_trn_fifo.analysis_export);
-   
-endfunction : connect_phase
-
-
-task uvme_reset_st_cov_model_c::run_phase(uvm_phase phase);
-   
-   super.run_phase(phase);
-  
-  fork
-    // Configuration
-    forever begin
-      cntxt.sample_cfg_e.wait_trigger();
-      sample_cfg();
-    end
-    
-    // Context
-    forever begin
-      cntxt.sample_cntxt_e.wait_trigger();
-      sample_cntxt();
-    end
-    
-    // Active sequence item coverage
-    forever begin
-       active_seq_item_fifo.get(active_seq_item);
-       sample_active_seq_item();
-    end
-    
-    // Active monitored transaction coverage
-    forever begin
-       active_mon_trn_fifo.get(active_mon_trn);
-       sample_active_mon_trn();
-    end
-    
-    // Passive monitored transaction coverage
-    forever begin
-       passive_mon_trn_fifo.get(passive_mon_trn);
-       sample_passive_mon_trn();
-    end
-  join_none
-   
-endtask : run_phase
 
 
 function void uvme_reset_st_cov_model_c::sample_cfg();
@@ -218,25 +99,18 @@ function void uvme_reset_st_cov_model_c::sample_cntxt();
 endfunction : sample_cntxt
 
 
-function void uvme_reset_st_cov_model_c::sample_active_seq_item();
+function void uvme_reset_st_cov_model_c::sample_mon_trn();
    
-   reset_st_active_seq_item_cg.sample();
    
-endfunction : sample_active_seq_item
+   
+endfunction : sample_mon_trn
 
 
-function void uvme_reset_st_cov_model_c::sample_active_mon_trn();
+function void uvme_reset_st_cov_model_c::sample_seq_item();
    
-   reset_st_active_mon_trn_cg.sample();
    
-endfunction : sample_active_mon_trn
-
-
-function void uvme_reset_st_cov_model_c::sample_passive_mon_trn();
    
-   reset_st_passive_mon_trn_cg.sample();
-   
-endfunction : sample_passive_mon_trn
+endfunction : sample_seq_item
 
 
 `endif // __UVME_RESET_ST_COV_MODEL_SV__

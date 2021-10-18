@@ -42,9 +42,11 @@ class uvmt_reset_st_base_test_c extends uvm_test;
    
    
    constraint env_cfg_cons {
-      env_cfg.enabled         == 1;
-      env_cfg.is_active       == UVM_ACTIVE;
-      env_cfg.trn_log_enabled == 1;
+      env_cfg.enabled               == 1;
+      env_cfg.is_active             == UVM_ACTIVE;
+      env_cfg.scoreboarding_enabled == 1;
+      env_cfg.trn_log_enabled       == 1;
+      env_cfg.cov_model_enabled     == 1;
    }
    
    
