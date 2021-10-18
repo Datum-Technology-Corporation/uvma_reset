@@ -35,7 +35,7 @@ class uvme_reset_st_cfg_c extends uvm_object;
    // Objects
    rand uvma_reset_cfg_c  active_cfg;
    rand uvma_reset_cfg_c  passive_cfg;
-   rand uvml_sb_cfg_c     sb_cfg;
+   rand uvml_sb_simplex_cfg_c     sb_cfg;
    
    
    `uvm_object_utils_begin(uvme_reset_st_cfg_c)
@@ -119,7 +119,7 @@ function uvme_reset_st_cfg_c::new(string name="uvme_reset_st_cfg");
    
    active_cfg   = uvma_reset_cfg_c::type_id::create("active_cfg" );
    passive_cfg  = uvma_reset_cfg_c::type_id::create("passive_cfg");
-   sb_cfg       = uvml_sb_cfg_c   ::type_id::create("sb_cfg"     );
+   sb_cfg       = uvml_sb_simplex_cfg_c   ::type_id::create("sb_cfg"     );
    
 endfunction : new
 

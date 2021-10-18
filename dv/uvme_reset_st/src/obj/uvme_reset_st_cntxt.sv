@@ -25,7 +25,7 @@ class uvme_reset_st_cntxt_c extends uvm_object;
    uvma_reset_cntxt_c  passive_cntxt;
    
    // Scoreboard context handle
-   uvml_sb_cntxt_c  sb_cntxt;
+   uvml_sb_simplex_cntxt_c  sb_cntxt;
    
    // Events
    uvm_event  sample_cfg_e  ;
@@ -57,7 +57,7 @@ function uvme_reset_st_cntxt_c::new(string name="uvme_reset_st_cntxt");
    
    active_cntxt = uvma_reset_cntxt_c::type_id::create("active_cntxt");
    passive_cntxt = uvma_reset_cntxt_c::type_id::create("passive_cntxt");
-   sb_cntxt        = uvml_sb_cntxt_c     ::type_id::create("sb_cntxt"       );
+   sb_cntxt        = uvml_sb_simplex_cntxt_c     ::type_id::create("sb_cntxt"       );
    
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");
