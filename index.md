@@ -1,25 +1,39 @@
-# About
+# Home Page
+
+## [Get Latest Release](TODO)
+### [View Documentation online](TODO)
+
+----------------
+
+## About
 The Moore.io UVM Reset Agent is a simple and vital element to any UVM test bench.  Both for driving and monitoring purposes.  This project consists of the agent (`uvma_reset_pkg`), the self-testing UVM environment (`uvme_reset_st_pkg`) and the test bench (`uvmt_reset_st_pkg`) to verify the agent against itself.
 
-# IP
-* [Download latest release (.tgz)](Todo)
-* [View latest documentation](Todo)
-* [Browse code](https://github.com/Datum-Technology-Corporation/uvma_reset/tree/main/dv/uvma_reset)
 
-# Metrics
-## Stability
-Todo
+## Downloads
 
-## Coverage
-Todo
+| Latest Release (v1.0 Beta 0) | Stable (Nightly) | Stable (Weekly) |
+| --------------------- | ---------------- | --------------- |
+| [Source Code](TODO) | [Source Code](TODO) | [Source Code](TODO) |
+| [Documentation](TODO) | [Documentation](TODO) | [Documentation](TODO) |
 
-# Management
-* [Issues](https://github.com/Datum-Technology-Corporation/uvma_reset/issues)
-* [Wiki](https://github.com/Datum-Technology-Corporation/uvma_reset/wiki)
-* [Discussions](https://github.com/Datum-Technology-Corporation/uvma_reset/discussions)
-* [Projects](https://github.com/Datum-Technology-Corporation/uvma_reset/projects)
-> * [uvma_reset](https://github.com/Datum-Technology-Corporation/uvma_reset/projects/1)
-> * [uvme_reset_st](https://github.com/Datum-Technology-Corporation/uvma_reset/projects/2)
-> * [uvmt_reset_st](https://github.com/Datum-Technology-Corporation/uvma_reset/projects/3)
-* Regressions
-> * Todo
+> **[View All Releases](TODO)**
+
+
+## Management
+
+| **[Issues](https://github.com/Datum-Technology-Corporation/uvma_reset/issues)** | **[Discussions](https://github.com/Datum-Technology-Corporation/uvma_reset/discussions)** |
+| **[Projects](https://github.com/Datum-Technology-Corporation/uvma_reset/projects)** | **[Wiki](https://github.com/Datum-Technology-Corporation/uvma_reset/wiki)** |
+
+
+## Metrics
+
+| Latest Release (v1.0 Beta 0) | Stable (Nightly) | Stable (Weekly) |
+| --------------------- | ---------------- | --------------- |
+| [Functional Coverage Report](TODO) | [Functional Coverage Report](TODO) | [Functional Coverage Report](TODO) |
+| [Release Regression Test Report](TODO) | [Regression Test Report](TODO) | [Regression Test Report](TODO) |
+
+----------------
+
+## News
+### 2021/10/22 - Hello, World!
+The Moore.io Core Libraries are being brought online for the very first time. Watch this space in the near future!
