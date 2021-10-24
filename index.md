@@ -9,6 +9,12 @@
 The [Moore.io](https://www.mooreio.com) UVM Reset Agent is a simple and vital element to any UVM test bench.  Both for driving and monitoring purposes.  This project consists of the agent (`uvma_reset_pkg`), the self-testing UVM environment (`uvme_reset_st_pkg`) and the test bench (`uvmt_reset_st_pkg`) to verify the agent against itself.
 
 
+## Management
+
+| **[Issues](https://github.com/Datum-Technology-Corporation/uvma_reset/issues)** | **[Discussions](https://github.com/Datum-Technology-Corporation/uvma_reset/discussions)** |
+| **[Sub-Projects](https://github.com/Datum-Technology-Corporation/uvma_reset/projects)** | **[Wiki](https://github.com/Datum-Technology-Corporation/uvma_reset/wiki)** |
+
+
 ## Downloads
 
 | Latest Release (v1.0 Beta 0) | Stable (Nightly) | Stable (Weekly) |
@@ -18,11 +24,6 @@ The [Moore.io](https://www.mooreio.com) UVM Reset Agent is a simple and vital el
 
 > **[View All Releases](TODO)**
 
-
-## Management
-
-| **[Issues](https://github.com/Datum-Technology-Corporation/uvma_reset/issues)** | **[Discussions](https://github.com/Datum-Technology-Corporation/uvma_reset/discussions)** |
-| **[Projects](https://github.com/Datum-Technology-Corporation/uvma_reset/projects)** | **[Wiki](https://github.com/Datum-Technology-Corporation/uvma_reset/wiki)** |
 
 
 ## Metrics
