@@ -15,6 +15,6 @@
 ./setup_project.py
 source ./setup_terminal.sh
 ../tools/.imports/dvm/src/dvm.py cpel uvmt_reset_st
-../tools/.imports/dvm/src/dvm.py sim uvmt_reset_st -t traffic -s 1 -c
+../tools/.imports/dvm/src/dvm.py sim uvmt_reset_st -t rand_pulses -s 1 -c
 ../tools/.imports/dvm/src/dvm.py results uvmt_reset_st results
 #../tools/.imports/dvm/src/dvm.py cov uvmt_reset_st
