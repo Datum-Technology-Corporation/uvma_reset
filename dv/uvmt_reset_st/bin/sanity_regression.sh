@@ -14,7 +14,7 @@
 # Launched from uvml project sim dir
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/dvm/src/dvm.py cpel uvmt_reset_st
-../tools/.imports/dvm/src/dvm.py sim uvmt_reset_st -t rand_pulses -s 1 -c
-../tools/.imports/dvm/src/dvm.py results uvmt_reset_st results
-#../tools/.imports/dvm/src/dvm.py cov uvmt_reset_st
+../tools/.imports/mio/mio.py cpel uvmt_reset_st
+../tools/.imports/mio/mio.py sim uvmt_reset_st -t rand_pulses -s 1 -c
+../tools/.imports/mio/mio.py results uvmt_reset_st results
+#../tools/.imports/mio/mio.py cov uvmt_reset_st
