@@ -6,7 +6,9 @@
 ----------------
 
 ## About
-The [Moore.io](https://www.mooreio.com) UVM Reset Agent is a simple and vital element to any UVM test bench.  Both for driving and monitoring purposes.  This project consists of the agent (`uvma_reset_pkg`), the self-testing UVM environment (`uvme_reset_st_pkg`) and the test bench (`uvmt_reset_st_pkg`) to verify the agent against itself.
+The [Moore.io](https://www.mooreio.com) UVM Reset Agent is a simple and vital element to any UVM test bench both for driving and monitoring purposes.
+![Block Diagram](assets/img/agent_block_diagram.svg)
+This project consists of the agent (`uvma_reset_pkg`), the self-testing UVM environment (`uvme_reset_st_pkg`) and the test bench (`uvmt_reset_st_pkg`) to verify the agent against itself.
 
 
 ## Management
