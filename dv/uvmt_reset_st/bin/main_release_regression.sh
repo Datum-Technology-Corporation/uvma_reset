@@ -17,4 +17,4 @@ source ./setup_terminal.sh
 ../tools/.imports/mio/src/mio.py cpel uvmt_reset_st
 ../tools/.imports/mio/src/mio.py sim uvmt_reset_st -t rand_pulses -s 1 -c
 ../tools/.imports/mio/src/mio.py results uvmt_reset_st results
-#../tools/.imports/mio/src/mio.py cov uvmt_reset_st
+../tools/.imports/mio/src/mio.py cov uvmt_reset_st
