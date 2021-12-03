@@ -12,7 +12,7 @@
 
 
 # Launched from uvml project sim dir
-./setup_project.py
+python ./setup_project.py
 source ./setup_terminal.sh
 ../tools/.imports/mio/src/mio.py cpel uvmt_reset_st
 ../tools/.imports/mio/src/mio.py sim uvmt_reset_st -t rand_pulses -s 1 -c
