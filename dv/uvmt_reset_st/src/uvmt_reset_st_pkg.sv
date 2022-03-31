@@ -16,12 +16,12 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_macros.sv"
-`include "uvml_logs_macros.sv"
-`include "uvml_sb_macros.sv"
-`include "uvma_reset_macros.sv"
-`include "uvme_reset_st_macros.sv"
-`include "uvmt_reset_st_macros.sv"
+`include "uvml_macros.svh"
+`include "uvml_logs_macros.svh"
+`include "uvml_sb_macros.svh"
+`include "uvma_reset_macros.svh"
+`include "uvme_reset_st_macros.svh"
+`include "uvmt_reset_st_macros.svh"
 
 // Time units and precision for this test bench
 timeunit       1ns;
@@ -35,27 +35,27 @@ timeprecision  1ps;
  * Encapsulates all the types and test cases for self-testing a Reset VIP.
  */
 package uvmt_reset_st_pkg;
-   
+
    import uvm_pkg          ::*;
    import uvml_pkg         ::*;
    import uvml_logs_pkg    ::*;
    import uvml_sb_pkg      ::*;
    import uvma_reset_pkg   ::*;
    import uvme_reset_st_pkg::*;
-   
+
    // Constants / Structs / Enums
    `include "uvmt_reset_st_constants.sv"
    `include "uvmt_reset_st_tdefs.sv"
-   
+
    // Sequences
-   
+
    // Base test
    `include "uvmt_reset_st_test_cfg.sv"
    `include "uvmt_reset_st_base_test.sv"
-   
+
    // Functional tests
    `include "uvmt_reset_st_rand_pulses_test.sv"
-   
+
 endpackage : uvmt_reset_st_pkg
 
 
