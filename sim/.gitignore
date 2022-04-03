@@ -12,3 +12,5 @@ results/*
 history.yaml
 *.zip
 xsim.covdb/*
+results.html
+results.xml
