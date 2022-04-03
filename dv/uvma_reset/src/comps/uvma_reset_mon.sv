@@ -112,8 +112,8 @@ endtask : run_phase
 task uvma_reset_mon_c::sample_trn(output uvma_reset_mon_trn_c trn);
 
    case (cfg.reset_type)
-      UVMA_RESET_TYPE_SYNCHRONOUS : sample_trn_synchronous (trn);
-      UVMA_RESET_TYPE_ASYNCHRONOUS: sample_trn_asynchronous(trn);
+      UVML_RESET_TYPE_SYNCHRONOUS : sample_trn_synchronous (trn);
+      UVML_RESET_TYPE_ASYNCHRONOUS: sample_trn_asynchronous(trn);
 
       default: `uvm_fatal("RESET_MON", $sformatf("Invalid cfg.reset_type: %s", cfg.reset_type.name()))
    endcase
@@ -131,11 +131,11 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
    do begin
       @(cntxt.vif./*passive_mp.*/mon_cb);
       case (cntxt.reset_state)
-         UVMA_RESET_STATE_PRE_RESET: begin
+         UVML_RESET_STATE_PRE_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset_n === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.transition = UVML_EDGE_ASSERTED;
                      trn.set_timestamp_end($realtime());
                      ap.write(trn);
@@ -144,9 +144,9 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.transition = UVML_EDGE_ASSERTED;
                      trn.set_timestamp_end($realtime());
                      ap.write(trn);
@@ -159,11 +159,11 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
             endcase
          end
 
-         UVMA_RESET_STATE_IN_RESET: begin
+         UVML_RESET_STATE_IN_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset_n === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_POST_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
                      trn.transition = UVML_EDGE_DEASSERTED;
                      trn.set_timestamp_end($realtime());
                      sampled_trn = 1;
@@ -173,9 +173,9 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_POST_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
                      trn.transition = UVML_EDGE_DEASSERTED;
                      trn.set_timestamp_end($realtime());
                      sampled_trn = 1;
@@ -189,11 +189,11 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
             endcase
          end
 
-         UVMA_RESET_STATE_POST_RESET: begin
+         UVML_RESET_STATE_POST_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset_n === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.transition = UVML_EDGE_ASSERTED;
                      trn.set_timestamp_end($realtime());
                      ap.write(trn);
@@ -202,9 +202,9 @@ task uvma_reset_mon_c::sample_trn_synchronous(output uvma_reset_mon_trn_c trn);
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   if (cntxt.vif./*passive_mp.*/mon_cb.reset === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.transition = UVML_EDGE_ASSERTED;
                      trn.set_timestamp_end($realtime());
                      ap.write(trn);
@@ -233,18 +233,18 @@ task uvma_reset_mon_c::sample_trn_asynchronous(output uvma_reset_mon_trn_c trn);
 
    do begin
       case (cntxt.reset_state)
-         UVMA_RESET_STATE_PRE_RESET: begin
+         UVML_RESET_STATE_PRE_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   wait (cntxt.vif.reset_n === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.set_timestamp_start($realtime());
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   wait (cntxt.vif.reset === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.set_timestamp_start($realtime());
                   end
                end
@@ -253,19 +253,19 @@ task uvma_reset_mon_c::sample_trn_asynchronous(output uvma_reset_mon_trn_c trn);
             endcase
          end
 
-         UVMA_RESET_STATE_IN_RESET: begin
+         UVML_RESET_STATE_IN_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   wait (cntxt.vif.reset_n === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_POST_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
                      trn.set_timestamp_end($realtime());
                      sampled_trn       = 1;
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   wait (cntxt.vif.reset === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_POST_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
                      trn.set_timestamp_end($realtime());
                      sampled_trn       = 1;
                   end
@@ -275,18 +275,18 @@ task uvma_reset_mon_c::sample_trn_asynchronous(output uvma_reset_mon_trn_c trn);
             endcase
          end
 
-         UVMA_RESET_STATE_POST_RESET: begin
+         UVML_RESET_STATE_POST_RESET: begin
             case (cfg.polarity)
-               UVMA_RESET_POLARITY_ACTIVE_LOW : begin
+               UVML_RESET_ACTIVE_LOW : begin
                   wait (cntxt.vif.reset_n === 0) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.set_timestamp_start($realtime());
                   end
                end
 
-               UVMA_RESET_POLARITY_ACTIVE_HIGH: begin
+               UVML_RESET_ACTIVE_HIGH: begin
                   wait (cntxt.vif.reset === 1) begin
-                     cntxt.reset_state = UVMA_RESET_STATE_IN_RESET;
+                     cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
                      trn.set_timestamp_start($realtime());
                   end
                end
