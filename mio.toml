@@ -1,0 +1,12 @@
+# Copyright 2022 Datum Technology Corporation
+# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+########################################################################################################################
+
+
+[project]
+name        = "uvma_reset"
+full-name   = "Moore.io UVM Reset Agent"
+description = ""
+
+[simulation]
+preferred-simulators = [ "vivado" ]

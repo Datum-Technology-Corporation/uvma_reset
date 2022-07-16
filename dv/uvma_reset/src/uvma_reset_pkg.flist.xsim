@@ -4,10 +4,10 @@
 
 
 // Directories
--i ${DV_UVMA_RESET_SRC_PATH}
--i ${DV_UVMA_RESET_SRC_PATH}/comps
--i ${DV_UVMA_RESET_SRC_PATH}/obj
--i ${DV_UVMA_RESET_SRC_PATH}/seq
+-i ${UVMA_RESET_SRC_PATH}
+-i ${UVMA_RESET_SRC_PATH}/comps
+-i ${UVMA_RESET_SRC_PATH}/obj
+-i ${UVMA_RESET_SRC_PATH}/seq
 
 // Files
-${DV_UVMA_RESET_SRC_PATH}/uvma_reset_pkg.sv
+${UVMA_RESET_SRC_PATH}/uvma_reset_pkg.sv

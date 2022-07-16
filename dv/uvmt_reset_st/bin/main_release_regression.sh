@@ -6,9 +6,9 @@
 
 
 # Launched from uvml project sim dir
-python ./setup_project.py
-source ./setup_terminal.sh
-../tools/.imports/mio/src/__main__.py cpel uvmt_reset_st
-../tools/.imports/mio/src/__main__.py sim uvmt_reset_st -t rand_pulses -s 1 -c
-../tools/.imports/mio/src/__main__.py results uvmt_reset_st results
-../tools/.imports/mio/src/__main__.py cov uvmt_reset_st
+shopt -s expand_aliases
+source ~/.bashrc
+mio cpel    uvmt_reset_st
+mio sim     uvmt_reset_st -t rand_pulses -s 1 -c
+mio results uvmt_reset_st results
+mio cov     uvmt_reset_st
